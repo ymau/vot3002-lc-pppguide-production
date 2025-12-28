@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>L3 - (Production Project) Project Plan Expressions Exercise</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L3 - (Production Project) Useful Expressions for Project Plan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(-45deg,#FDEDED, #F7F6D3, #AAC4F5); min-height: 100vh; padding: 10px; overflow-x: hidden; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; }
+      
+        .header { 
+          background: linear-gradient(135deg,#FF8F00 0%, #06D001 100%); 
+          color: white; 
+          padding: 20px 15px; 
+          text-align: center; 
+          position: relative; }
+      
+        .lang-toggle { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.2); border: 2px solid white; color: white; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.75em; font-weight: 600; transition: all 0.3s ease; }
+        .lang-toggle:hover { background: white; color: #0891b2; }
+        .header h1 { font-size: 1.5em; margin-bottom: 8px; font-weight: 700; }
+        .header p { font-size: 0.9em; opacity: 0.95; font-weight: 300; }
+        .progress-container { background: white; padding: 15px; border-bottom: 2px solid #f0f0f0; }
+        .progress-bar { width: 100%; height: 25px; background: #e0e0e0; border-radius: 15px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #F5C857 0%, #F875AA 100%); transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.8em; }
+        .score-display { text-align: center; margin-top: 10px; font-size: 1em; font-weight: 600; color: #0891b2; }
+        .content { padding: 20px 15px; }
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .section-intro { background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .section-intro h2 { font-size: 1.2em; margin-bottom: 10px; }
+        .section-intro p { font-size: 0.95em; line-height: 1.5; }
+        .expression-box { background: #f0fdfa; border-left: 4px solid #0891b2; padding: 15px; margin: 12px 0; border-radius: 8px; transition: all 0.3s ease; }
+        .expression-box strong { color: #0891b2; font-size: 1em; display: block; margin-bottom: 6px; }
+        .activity-container { background: #fff; border: 2px solid #e0e0e0; border-radius: 10px; padding: 20px 15px; margin: 15px 0; }
+        .activity-title { font-size: 1.2em; color: #0891b2; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .activity-icon { font-size: 1.2em; }
+        .drag-source { margin: 15px 0; padding: 15px; background: #f8fafc; border-radius: 8px; min-height: 60px; }
+        .drag-item { background: linear-gradient(135deg, #6A0066 0%, #06b6d4 100%); color: white; padding: 12px 15px; border-radius: 8px; margin: 8px 0; cursor: move; display: block; font-weight: 500; transition: transform 0.2s ease, box-shadow 0.2s ease; user-select: none; touch-action: none; font-size: 0.95em; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .drag-item:active { transform: scale(1.05); opacity: 0.9; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .drag-item.dragging { opacity: 0.7; transform: scale(1.1) rotate(3deg); box-shadow: 0 10px 30px rgba(0,0,0,0.4); z-index: 1000; }
+        .drop-zone { min-height: 80px; border: 2px dashed #cbd5e1; border-radius: 10px; padding: 15px; margin: 12px 0; background: #f8fafc; transition: all 0.3s ease; }
+        body.dragging-active .drop-zone { animation: pulse 1s infinite; border-color: #0891b2; }
+        @keyframes pulse { 0%, 100% { border-width: 2px; background: #f8fafc; } 50% { border-width: 3px; background: #ecfeff; } }
+        .drop-zone.drag-over { border-color: #0891b2; background: #cffafe; border-width: 4px; transform: scale(1.02); box-shadow: 0 0 20px rgba(8,145,178,0.3); }
+        .drop-zone.correct { border-color: #10b981; background: #d1fae5; }
+        .drop-zone.incorrect { border-color: #ef4444; background: #fee2e2; }
+        .drop-zone-title { font-weight: 600; color: #334155; margin-bottom: 10px; font-size: 0.95em; }
+        .choice-btn { background: white; border: 2px solid #0891b2; color: #0891b2; padding: 12px 18px; border-radius: 8px; margin: 8px 0; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.95em; font-weight: 500; transition: all 0.3s ease; display: block; width: 100%; text-align: left; }
+        .choice-btn:active { background: #0891b2; color: white; }
+        .choice-btn.selected { background: #0891b2; color: white; }
+        .choice-btn.correct { background: #10b981; border-color: #10b981; color: white; }
+        .choice-btn.incorrect { background: #ef4444; border-color: #ef4444; color: white; }
+        .feedback { padding: 15px; border-radius: 8px; margin: 15px 0; font-weight: 500; display: none; animation: slideIn 0.5s ease; font-size: 0.95em; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #d1fae5; color: #065f46; border-left: 4px solid #10b981; }
+        .feedback.incorrect { background: #fee2e2; color: #991b1b; border-left: 4px solid #ef4444; }
+        .input-field { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.95em; margin: 8px 0; transition: border-color 0.3s ease; box-sizing: border-box; max-width: 100%; }
+        .input-field:focus { outline: none; border-color: #0891b2; }
+        .btn-container { display: flex; gap: 10px; margin-top: 20px; flex-direction: column; }
+        .btn { width: 100%; padding: 14px 25px; border: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 1em; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .btn-primary { background: linear-gradient(135deg, #8B5DFF 0%, #73EC8B 100%); color: white; }
+        .btn-primary:active { transform: scale(0.98); }
+        .btn-secondary { background: #e2e8f0; color: #334155; }
+        .btn-secondary:active { background: #cbd5e1; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .badge { display: inline-block; background: #fbbf24; color: #78350f; padding: 6px 12px; border-radius: 15px; font-weight: 600; margin: 5px; font-size: 0.85em; animation: bounce 0.5s ease; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .achievement { text-align: center; padding: 30px 15px; }
+        .achievement-icon { font-size: 4em; margin-bottom: 15px; animation: rotateIn 0.8s ease; }
+        @keyframes rotateIn { from { transform: rotate(-180deg) scale(0); } to { transform: rotate(0) scale(1); } }
+        .inline-input-short { display: inline-block; width: 80px; max-width: 30%; vertical-align: middle; }
+        .inline-input-long { display: inline-block; width: 140px; max-width: 45%; vertical-align: middle; }
+        .inline-input-medium { display: inline-block; width: 120px; max-width: 40%; vertical-align: middle; }
+        .fill-blank-text { font-size: 1em; line-height: 2.2; word-wrap: break-word; }
+        @media (min-width: 768px) {
+            body { padding: 20px; }
+            .header { padding: 30px; }
+            .header h1 { font-size: 2em; }
+            .header p { font-size: 1.1em; }
+            .lang-toggle { top: 20px; right: 20px; font-size: 0.9em; padding: 8px 16px; }
+            .progress-bar { height: 30px; }
+            .score-display { font-size: 1.2em; }
+            .content { padding: 40px 30px; }
+            .section-intro { padding: 25px; }
+            .section-intro h2 { font-size: 1.8em; }
+            .expression-box { padding: 20px; }
+            .expression-box:hover { transform: translateX(5px); box-shadow: 0 5px 15px rgba(8,145,178,0.2); }
+            .activity-container { padding: 30px; }
+            .activity-title { font-size: 1.5em; }
+            .drag-item { display: inline-block; margin: 10px; padding: 15px 20px; }
+            .drag-item:hover { transform: scale(1.05); }
+            .drop-zone { min-height: 120px; padding: 20px; }
+            .choice-btn:hover { background: #0891b2; color: white; transform: translateX(10px); }
+            .inline-input-short { width: 150px; }
+            .inline-input-long { width: 250px; }
+            .inline-input-medium { width: 180px; }
+            .btn-container { flex-direction: row; }
+            .btn { flex: 1; }
+            .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(8,145,178,0.3); }
+        }
+        .lang-en, .lang-zh { display: none; }
+        body[data-lang="en"] .lang-en { display: inline; }
+        body[data-lang="zh"] .lang-zh { display: inline; }
+    </style>
+</head>
+<body data-lang="en">
+    <div class="container">
+        <div class="header">
+            <button class="lang-toggle" onclick="toggleLanguage()">
+                <span class="lang-en">中文</span>
+                <span class="lang-zh">English</span>
+            </button>
+            <h1>
+                <span class="lang-en">Project Plan Expressions<br>(Production Project)</span>
+                <span class="lang-zh">項目計劃常用語句<br>(生產項目計劃)</span>
+            </h1>
+            <p>
+                <span class="lang-en">Master useful expressions for 3D-printed keychain production plan</span>
+                <span class="lang-zh">掌握3D打印鎖匙扣生產計劃的常用語句</span>
+            </p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill">0%</div>
+            </div>
+            <div class="score-display">
+                <span class="lang-en">⭐Score:</span>
+                <span class="lang-zh">⭐得分：</span>
+                <span id="scoreDisplay">0</span> / <span id="totalScore">18</span> ⭐
+            </div>
+        </div>
+
+        <div class="content">
+
+            <!-- Page 0: Welcome -->
+            <div class="page active" id="page0">
+                <div class="section-intro">
+                    <h2>
+                        <span class="lang-en">Your Learning Journey! 🚀</span>
+                        <span class="lang-zh">你的學習之旅！🚀</span>
+                    </h2>
+                    <p>
+                        <span class="lang-en">Learn expressions for planning 3D-printed keychains for YC Open Day!</span>
+                        <span class="lang-zh">學習為青年學院開放日製作3D打印鎖匙扣的計劃語句！</span>
+                    </p>
+                </div>
+                <div class="activity-container">
+                    <h3>
+                        <span class="lang-en">What You'll Learn:</span>
+                        <span class="lang-zh">學習內容：</span>
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
+                        <div class="expression-box">
+                            <strong><span class="lang-en">📋 Background</span><span class="lang-zh">📋 背景</span></strong>
+                            <span class="lang-en">YC Open Day context</span><span class="lang-zh">開放日背景</span>
+                        </div>
+                        <div class="expression-box">
+                            <strong><span class="lang-en">🎯 Project Purpose</span><span class="lang-zh">🎯 生產目的</span></strong>
+                            <span class="lang-en">Keychain production goals</span><span class="lang-zh">鎖匙扣製作目標</span>
+                        </div>
+                        <div class="expression-box">
+                            <strong><span class="lang-en">📝 Requirements</span><span class="lang-zh">📝 要求</span></strong>
+                            <span class="lang-en">Keychain specifications</span><span class="lang-zh">鎖匙扣規格</span>
+                        </div>
+                        <div class="expression-box">
+                            <strong><span class="lang-en">✅ Success Criteria</span><span class="lang-zh">✅ 成功準則</span></strong>
+                            <span class="lang-en">Production quality standards</span><span class="lang-zh">生產質量標準</span>
+                        </div>
+                        <div class="expression-box">
+                            <strong><span class="lang-en">👥 People Involved</span><span class="lang-zh">👥 相關人員</span></strong>
+                            <span class="lang-en">Production team roles</span><span class="lang-zh">製作團隊角色</span>
+                        </div>
+                        <div class="expression-box">
+                            <strong><span class="lang-en">⚠️ Potential Problems</span><span class="lang-zh">⚠️ 潛在問題</span></strong>
+                            <span class="lang-en">3D printing challenges</span><span class="lang-zh">3D打印挑戰</span>
+                        </div>
+                        <div class="expression-box">
+                            <strong><span class="lang-en">📅 Milestones</span><span class="lang-zh">📅 里程碑</span></strong>
+                            <span class="lang-en">Production timeline</span><span class="lang-zh">生產時間表</span>
+                        </div>
+                        <div class="expression-box">
+                            <strong><span class="lang-en">🛠️ Resources Needed</span><span class="lang-zh">🛠️ 所需資源</span></strong>
+                            <span class="lang-en">3D printing materials</span><span class="lang-zh">3D打印材料</span>
+                        </div>
+                        <div class="expression-box">
+                            <strong><span class="lang-en">📦 Project Outputs</span><span class="lang-zh">📦 生產成果</span></strong>
+                            <span class="lang-en">Final keychain products</span><span class="lang-zh">最終鎖匙扣產品</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-container">
+                    <button class="btn btn-primary" onclick="nextPage()">
+                        <span class="lang-en">Start Learning 🎮</span>
+                        <span class="lang-zh">開始學習 🎮</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Page 1: Section Matching -->
+            <div class="page" id="page1">
+                <div class="section-intro">
+                    <h2><span class="lang-en">Level 1: Section Matching</span><span class="lang-zh">第1關：配對部分</span></h2>
+                    <p><span class="lang-en">Match keychain production sections to their purposes!</span><span class="lang-zh">將鎖匙扣製作部分的用途配對！</span></p>
+                </div>
+                <div class="activity-container">
+                    <div class="activity-title">
+                        <span class="activity-icon">🎯</span>
+                        <span><span class="lang-en">Drag sections to purposes</span><span class="lang-zh">將製作部分拖到用途</span></span>
+                    </div>
+                    <div class="drag-source" id="dragSource1">
+                        <div class="drag-item" draggable="true" data-section="background"><span class="lang-en">📋 Background</span><span class="lang-zh">📋 背景</span></div>
+                        <div class="drag-item" draggable="true" data-section="purpose"><span class="lang-en">🎯 Project Purpose</span><span class="lang-zh">🎯 生產目的</span></div>
+                        <div class="drag-item" draggable="true" data-section="requirements"><span class="lang-en">📝 Requirements</span><span class="lang-zh">📝 要求</span></div>
+                        <div class="drag-item" draggable="true" data-section="criteria"><span class="lang-en">✅ Success Criteria</span><span class="lang-zh">✅ 成功準則</span></div>
+                    </div>
+                    <div class="drop-zone" data-answer="background">
+                        <div class="drop-zone-title"><span class="lang-en">Explains YC Open Day and 3D printing workshop context</span><span class="lang-zh">解釋開放日及3D打印工作坊背景</span></div>
+                    </div>
+                    <div class="drop-zone" data-answer="purpose">
+                        <div class="drop-zone-title"><span class="lang-en">States goal to produce promotional keychains</span><span class="lang-zh">說明製作宣傳鎖匙扣的目標</span></div>
+                    </div>
+                    <div class="drop-zone" data-answer="requirements">
+                        <div class="drop-zone-title"><span class="lang-en">Lists keychain size, material, design specs</span><span class="lang-zh">列出鎖匙扣尺寸、材料、設計規格</span></div>
+                    </div>
+                    <div class="drop-zone" data-answer="criteria">
+                        <div class="drop-zone-title"><span class="lang-en">Defines quality standards for finished keychains</span><span class="lang-zh">定義完成鎖匙扣的質量標準</span></div>
+                    </div>
+                    <div class="feedback" id="feedback1"></div>
+                </div>
+                <div class="btn-container">
+                    <button class="btn btn-secondary" onclick="prevPage()"><span class="lang-en">← Back</span><span class="lang-zh">← 返回</span></button>
+                    <button class="btn btn-primary" id="check1" onclick="checkActivity1()"><span class="lang-en">Check Answers</span><span class="lang-zh">檢查答案</span></button>
+                    <button class="btn btn-primary" id="next1" onclick="nextPage()" style="display:none;"><span class="lang-en">Next Level →</span><span class="lang-zh">下一關 →</span></button>
+                </div>
+            </div>
+
+            <!-- Page 2: Background -->
+            <div class="page" id="page2">
+                <div class="section-intro">
+                    <h2><span class="lang-en">Level 2: Background</span><span class="lang-zh">第2關：背景</span></h2>
+                    <p><span class="lang-en">Learn expressions for keychain production context</span><span class="lang-zh">學習鎖匙扣製作背景語句</span></p>
+                </div>
+                <div class="activity-container">
+                    <h3><span class="lang-en">📋 Key Expressions:</span><span class="lang-zh">📋 常用語句：</span></h3>
+                    <div class="expression-box">
+                        <strong>"[College] will organise..." <span class="lang-zh">／「[學院]將會舉辦...」</span></strong>
+                        <span class="lang-en">Example: Youth College will organise Open Day on 15th March 2026.</span>
+                        <span class="lang-zh">例子：青年學院將於2026年3月15日舉辦開放日。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"has asked our team to..." <span class="lang-zh">／「已要求我們的團隊...」</span></strong>
+                        <span class="lang-en">Example: Pro-Act Centre has asked our team to produce 100 keychains for visitors.</span>
+                        <span class="lang-zh">例子：Pro-Act Centre 已要求我們的團隊為參觀者製作100個鎖匙扣。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"There is demand for..." <span class="lang-zh">／「有...的需求」</span></strong>
+                        <span class="lang-en">Example: There is demand for promotional items at Open Day.</span>
+                        <span class="lang-zh">例子：開放日有宣傳物品的需求。</span>
+                    </div>
+                </div>
+                <div class="activity-container">
+                    <div class="activity-title">
+                        <span class="activity-icon">✍️</span>
+                        <span><span class="lang-en">Fill in the Blank</span><span class="lang-zh">填充</span></span>
+                    </div>
+                    <p style="margin-bottom: 15px;"><span class="lang-en">Complete the keychain production background:</span><span class="lang-zh">完成鎖匙扣製作背景：</span></p>
+                    <p class="fill-blank-text">
+                        Youth College <input type="text" class="input-field inline-input-short" id="blank1" placeholder="Type here"> hold Open Day next month. Pro-Act Centre <input type="text" class="input-field inline-input-long" id="blank2" placeholder="Type here"> us to produce keychains.
+                    </p>
+                    <div style="background: #ecfeff; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                        <strong>💡 <span class="lang-en">Hints:</span><span class="lang-zh">提示：</span></strong> 
+                        <span class="lang-en">Use 'will' for future events. Use 'have/has + past participle' for past-present connections.</span>
+                        <span class="lang-zh">將來的事件用 'will'。用 'have/has + 過去分詞' 表達連繫過去與現在。</span>
+                    </div>
+                    <div class="feedback" id="feedback2"></div>
+                </div>
+                <div class="btn-container">
+                    <button class="btn btn-secondary" onclick="prevPage()"><span class="lang-en">← Back</span><span class="lang-zh">← 返回</span></button>
+                    <button class="btn btn-primary" onclick="checkActivity2()"><span class="lang-en">Check Answers</span><span class="lang-zh">檢查答案</span></button>
+                    <button class="btn btn-primary" id="next2" onclick="nextPage()" style="display:none;"><span class="lang-en">Next Level →</span><span class="lang-zh">下一關 →</span></button>
+                </div>
+            </div>
+
+            <!-- Page 3: Purpose & Requirements -->
+<div class="page" id="page3">
+    <div class="section-intro">
+        <h2><span class="lang-en">Level 3: Purpose & Requirements</span><span class="lang-zh">第3關：目的與要求</span></h2>
+        <p><span class="lang-en">Learn expressions for stating keychain production goals</span><span class="lang-zh">學習說明鎖匙扣生產目標的語句</span></p>
+    </div>
+    <div class="activity-container">
+        <h3><span class="lang-en">🎯 Key Expressions:</span><span class="lang-zh">🎯 常用語句：</span></h3>
+        <div class="expression-box">
+            <strong><span class="lang-en">Project Purpose: "To [verb]..."</span><span class="lang-zh">項目目的：「To [動詞]...」</span></strong>
+            <span class="lang-en">Example: To design and produce 100 promotional 3D-printed keychains for YC Open Day visitors.</span>
+            <span class="lang-zh">例子：為青年學院開放日參觀者設計及製作100個宣傳3D打印鎖匙扣。</span>
+        </div>
+        <div class="expression-box">
+            <strong><span class="lang-en">Requirements: "should be..." / "must include..."</span><span class="lang-zh">要求：「should be...」／「must include...」</span></strong>
+            <span class="lang-en">Example: The keychain should be compact, durable, attractive and include the YC logo.</span>
+            <span class="lang-zh">例子：鎖匙扣應該小巧、耐用、吸引且包含青年學院標誌。</span>
+        </div>
+    </div>
+    <div class="activity-container">
+        <div class="activity-title">
+            <span class="activity-icon">🎲</span>
+            <span><span class="lang-en">Multiple Choice Challenge</span><span class="lang-zh">選擇題挑戰</span></span>
+        </div>
+        
+        <!-- Question 1 -->
+        <div class="question-group">
+            <p style="margin-bottom: 15px;">
+                <strong><span class="lang-en">Question 1:</span><span class="lang-zh">問題1：</span></strong>
+                <span class="lang-en">Which expression correctly states the production purpose?</span>
+                <span class="lang-zh">哪個表達方式能正確地陳述生產<strong>目的</strong>？</span>
+            </p>
+            <button class="choice-btn" onclick="selectChoice(this, 'q1', false)">
+                <span class="lang-en">A) The project will produce keychains</span>
+                <span class="lang-zh">A) 該項目將製作鎖匙扣</span>
+            </button>
+            <button class="choice-btn" onclick="selectChoice(this, 'q1', true)">
+                <span class="lang-en">B) To design and produce promotional 3D-printed keychains for YC Open Day</span>
+                <span class="lang-zh">B) 為青年學院開放日設計及製作宣傳3D打印鎖匙扣</span>
+            </button>
+            <button class="choice-btn" onclick="selectChoice(this, 'q1', false)">
+                <span class="lang-en">C) We are producing keychains</span>
+                <span class="lang-zh">C) 我們正在製作鎖匙扣</span>
+            </button>
+        </div>
+        
+        <!-- Question 2 -->
+        <div class="question-group" style="margin-top: 30px;">
+            <p style="margin-bottom: 15px;">
+                <strong><span class="lang-en">Question 2:</span><span class="lang-zh">問題2：</span></strong>
+                <span class="lang-en">Which expression describes a keychain requirement?</span>
+                <span class="lang-zh">哪個表達方式能正確地陳述鎖匙扣<strong>要求</strong>？</span>
+            </p>
+            <button class="choice-btn" onclick="selectChoice(this, 'q2', false)">
+                <span class="lang-en">A) The keychains will be ready next week</span>
+                <span class="lang-zh">A) 鎖匙扣將於下週完成</span>
+            </button>
+            <button class="choice-btn" onclick="selectChoice(this, 'q2', true)">
+                <span class="lang-en">B) The keychain should be compact, durable and include the YC logo</span>
+                <span class="lang-zh">B) 鎖匙扣應該小巧、耐用且包含青年學院標誌</span>
+            </button>
+            <button class="choice-btn" onclick="selectChoice(this, 'q2', false)">
+                <span class="lang-en">C) To produce keychains for Open Day</span>
+                <span class="lang-zh">C) 為開放日製作鎖匙扣</span>
+            </button>
+        </div>
+        
+        <div class="feedback" id="feedback3"></div>
+    </div>
+    <div class="btn-container">
+        <button class="btn btn-secondary" onclick="prevPage()"><span class="lang-en">← Back</span><span class="lang-zh">← 返回</span></button>
+        <button class="btn btn-primary" onclick="checkActivity3()"><span class="lang-en">Check Answers</span><span class="lang-zh">檢查答案</span></button>
+        <button class="btn btn-primary" id="next3" onclick="nextPage()" style="display:none;"><span class="lang-en">Next Level →</span><span class="lang-zh">下一關 →</span></button>
+    </div>
+</div>
+
+
+            <!-- Page 4: Success Criteria -->
+            <div class="page" id="page4">
+                <div class="section-intro">
+                    <h2><span class="lang-en">Level 4: Success Criteria</span><span class="lang-zh">第4關：成功準則</span></h2>
+                    <p><span class="lang-en">Define quality standards for keychain production</span><span class="lang-zh">定義鎖匙扣製作的質量標準</span></p>
+                </div>
+                <div class="activity-container">
+                    <h3><span class="lang-en">✅ Key Expressions:</span><span class="lang-zh">✅ 常用語句：</span></h3>
+                    <div class="expression-box">
+                        <strong>"The project will be successful if..." <span class="lang-zh">／「如果...，項目就會成功」</span></strong>
+                        <span class="lang-en">Example: The project will be successful if all 100 keychains are produced on time with high quality.</span>
+                        <span class="lang-zh">例子：如果所有100個鎖匙扣都能按時以高質量製作完成，項目就會成功。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"should meet the following standards..." <span class="lang-zh">／「應符合以下標準...」</span></strong>
+                        <span class="lang-en">Example: The keychains should meet durability and appearance standards.</span>
+                        <span class="lang-zh">例子：鎖匙扣應符合耐用性和外觀標準。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"must pass quality checks..." <span class="lang-zh">／「必須通過質量檢查...」</span></strong>
+                        <span class="lang-en">Example: Each keychain must pass quality checks before distribution.</span>
+                        <span class="lang-zh">例子：每個鎖匙扣在派發前必須通過質量檢查。</span>
+                    </div>
+                </div>
+                <div class="activity-container">
+                    <div class="activity-title">
+                        <span class="activity-icon">✅</span>
+                        <span><span class="lang-en">Complete the Success Criteria</span><span class="lang-zh">完成成功準則</span></span>
+                    </div>
+                    <p style="margin-bottom: 15px;"><span class="lang-en">Choose the correct completion:</span><span class="lang-zh">選擇正確的完成句子：</span></p>
+                    <p><strong><span class="lang-en">"The keychain production will be successful if..."</span><span class="lang-zh">「如果...，鎖匙扣製作就會成功」</span></strong></p>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q4', true)">
+                        <span class="lang-en">A) all keychains are printed with no defects and delivered before Open Day</span>
+                        <span class="lang-zh">A) 所有鎖匙扣都無瑕疵地打印完成並在開放日前交付</span>
+                    </button>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q4', false)">
+                        <span class="lang-en">B) we design a beautiful keychain</span>
+                        <span class="lang-zh">B) 我們設計一個漂亮的鎖匙扣</span>
+                    </button>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q4', false)">
+                        <span class="lang-en">C) the 3D printer works properly</span>
+                        <span class="lang-zh">C) 3D打印機正常運作</span>
+                    </button>
+                    <div class="feedback" id="feedback4"></div>
+                </div>
+                <div class="btn-container">
+                    <button class="btn btn-secondary" onclick="prevPage()"><span class="lang-en">← Back</span><span class="lang-zh">← 返回</span></button>
+                    <button class="btn btn-primary" onclick="checkActivity4()"><span class="lang-en">Check Answers</span><span class="lang-zh">檢查答案</span></button>
+                    <button class="btn btn-primary" id="next4" onclick="nextPage()" style="display:none;"><span class="lang-en">Next Level →</span><span class="lang-zh">下一關 →</span></button>
+                </div>
+            </div>
+
+            <!-- Page 5: People Involved -->
+            <div class="page" id="page5">
+                <div class="section-intro">
+                    <h2><span class="lang-en">Level 5: People Involved</span><span class="lang-zh">第5關：相關人員</span></h2>
+                    <p><span class="lang-en">Identify production team roles and responsibilities</span><span class="lang-zh">識別製作團隊角色和職責</span></p>
+                </div>
+                <div class="activity-container">
+                    <h3><span class="lang-en">👥 Key Expressions:</span><span class="lang-zh">👥 常用語句：</span></h3>
+                    <div class="expression-box">
+                        <strong>"will be responsible for..." <span class="lang-zh">／「將負責...」</span></strong>
+                        <span class="lang-en">Example: The design team will be responsible for creating the keychain 3D model.</span>
+                        <span class="lang-zh">例子：設計團隊將負責製作鎖匙扣的3D模型。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"will manage..." / "will coordinate..." <span class="lang-zh">／「將管理...」／「將協調...」</span></strong>
+                        <span class="lang-en">Example: The project manager will coordinate the printing schedule.</span>
+                        <span class="lang-zh">例子：項目經理將協調打印時間表。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"will assist with..." <span class="lang-zh">／「將協助...」</span></strong>
+                        <span class="lang-en">Example: Students will assist with quality checking and packaging.</span>
+                        <span class="lang-zh">例子：學生將協助質量檢查和包裝。</span>
+                    </div>
+                </div>
+                <div class="activity-container">
+                    <div class="activity-title">
+                        <span class="activity-icon">👥</span>
+                        <span><span class="lang-en">Match Roles to Responsibilities</span><span class="lang-zh">配對角色與職責</span></span>
+                    </div>
+                    <p style="margin-bottom: 15px;">
+                        <strong><span class="lang-en">Question:</span><span class="lang-zh">問題：</span></strong>
+                        <span class="lang-en">Who "will be responsible for operating the 3D printers"?</span>
+                        <span class="lang-zh">誰「將負責操作3D打印機」？</span>
+                    </p>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q5', true)">
+                        <span class="lang-en">A) The production technicians</span>
+                        <span class="lang-zh">A) 生產技術員</span>
+                    </button>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q5', false)">
+                        <span class="lang-en">B) The project manager</span>
+                        <span class="lang-zh">B) 項目經理</span>
+                    </button>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q5', false)">
+                        <span class="lang-en">C) Open Day visitors</span>
+                        <span class="lang-zh">C) 開放日參觀者</span>
+                    </button>
+                    <div class="feedback" id="feedback5"></div>
+                </div>
+                <div class="btn-container">
+                    <button class="btn btn-secondary" onclick="prevPage()"><span class="lang-en">← Back</span><span class="lang-zh">← 返回</span></button>
+                    <button class="btn btn-primary" onclick="checkActivity5()"><span class="lang-en">Check Answers</span><span class="lang-zh">檢查答案</span></button>
+                    <button class="btn btn-primary" id="next5" onclick="nextPage()" style="display:none;"><span class="lang-en">Next Level →</span><span class="lang-zh">下一關 →</span></button>
+                </div>
+            </div>
+
+            <!-- Page 6: Potential Problems -->
+            <div class="page" id="page6">
+                <div class="section-intro">
+                    <h2><span class="lang-en">Level 6: Potential Problems</span><span class="lang-zh">第6關：潛在問題</span></h2>
+                    <p><span class="lang-en">Anticipate 3D printing production challenges</span><span class="lang-zh">預測3D打印製作挑戰</span></p>
+                </div>
+                <div class="activity-container">
+                    <h3><span class="lang-en">⚠️ Key Expressions:</span><span class="lang-zh">⚠️ 常用語句：</span></h3>
+                    <div class="expression-box">
+                        <strong>"A potential problem is..." <span class="lang-zh">／「一個潛在問題是...」</span></strong>
+                        <span class="lang-en">Example: A potential problem is printer malfunction during production.</span>
+                        <span class="lang-zh">例子：一個潛在問題是在製作期間打印機故障。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"may occur if..." <span class="lang-zh">／「如果...，可能會發生」</span></strong>
+                        <span class="lang-en">Example: Print defects may occur if the filament quality is poor.</span>
+                        <span class="lang-zh">例子：如果絲線質量差，可能會出現打印瑕疵。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"To prevent this, we will..." <span class="lang-zh">／「為防止這種情況，我們將...」</span></strong>
+                        <span class="lang-en">Example: To prevent this, we will test print samples before mass production.</span>
+                        <span class="lang-zh">例子：為防止這種情況，我們將在大量生產前測試打印樣本。</span>
+                    </div>
+                </div>
+                <div class="activity-container">
+                    <div class="activity-title">
+                        <span class="activity-icon">⚠️</span>
+                        <span><span class="lang-en">Identify Production Problems</span><span class="lang-zh">識別生產問題</span></span>
+                    </div>
+                    <p style="margin-bottom: 15px;">
+                        <strong><span class="lang-en">Question:</span><span class="lang-zh">問題：</span></strong>
+                        <span class="lang-en">Which is a realistic potential problem for 3D-printed keychains?</span>
+                        <span class="lang-zh">哪個是3D打印鎖匙扣的實際潛在問題？</span>
+                    </p>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q6', false)">
+                        <span class="lang-en">A) The keychains will be too popular</span>
+                        <span class="lang-zh">A) 鎖匙扣會太受歡迎</span>
+                    </button>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q6', true)">
+                        <span class="lang-en">B) Printing may take longer than expected, causing delays in production schedule</span>
+                        <span class="lang-zh">B) 打印可能比預期更長時間，導致生產進度延誤</span>
+                    </button>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q6', false)">
+                        <span class="lang-en">C) Too many volunteers will want to help</span>
+                        <span class="lang-zh">C) 太多義工想幫忙</span>
+                    </button>
+                    <div class="feedback" id="feedback6"></div>
+                </div>
+                <div class="btn-container">
+                    <button class="btn btn-secondary" onclick="prevPage()"><span class="lang-en">← Back</span><span class="lang-zh">← 返回</span></button>
+                    <button class="btn btn-primary" onclick="checkActivity6()"><span class="lang-en">Check Answers</span><span class="lang-zh">檢查答案</span></button>
+                    <button class="btn btn-primary" id="next6" onclick="nextPage()" style="display:none;"><span class="lang-en">Next Level →</span><span class="lang-zh">下一關 →</span></button>
+                </div>
+            </div>
+
+            <!-- Page 7: Milestones -->
+            <div class="page" id="page7">
+                <div class="section-intro">
+                    <h2><span class="lang-en">Level 7: Milestones</span><span class="lang-zh">第7關：里程碑</span></h2>
+                    <p><span class="lang-en">Plan the keychain production timeline</span><span class="lang-zh">規劃鎖匙扣製作時間表</span></p>
+                </div>
+                <div class="activity-container">
+                    <h3><span class="lang-en">📅 Key Expressions:</span><span class="lang-zh">📅 常用語句：</span></h3>
+                    <div class="expression-box">
+                        <strong>"By [date], we will..." <span class="lang-zh">／「到[日期]，我們將...」</span></strong>
+                        <span class="lang-en">Example: By 1st March, we will complete the design and 3D model.</span>
+                        <span class="lang-zh">例子：到3月1日，我們將完成設計和3D模型。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"is scheduled for..." <span class="lang-zh">／「計劃於...進行」</span></strong>
+                        <span class="lang-en">Example: Mass production is scheduled for 5th-12th March.</span>
+                        <span class="lang-zh">例子：大量生產計劃於3月5日至12日進行。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"must be completed before..." <span class="lang-zh">／「必須在...之前完成」</span></strong>
+                        <span class="lang-en">Example: All keychains must be completed before 14th March.</span>
+                        <span class="lang-zh">例子：所有鎖匙扣必須在3月14日之前完成。</span>
+                    </div>
+                </div>
+                <div class="activity-container">
+                    <div class="activity-title">
+                        <span class="activity-icon">📅</span>
+                        <span><span class="lang-en">Complete the Timeline</span><span class="lang-zh">完成時間表</span></span>
+                    </div>
+                    <p style="margin-bottom: 15px;">
+                        <strong><span class="lang-en">Question:</span><span class="lang-zh">問題：</span></strong>
+                        <span class="lang-en">Choose the correct milestone expression:</span>
+                        <span class="lang-zh">選擇正確的里程碑表達：</span>
+                    </p>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q7', true)">
+                        <span class="lang-en">A) By 10th March, we will complete printing 50 keychains</span>
+                        <span class="lang-zh">A) 到3月10日，我們將完成打印50個鎖匙扣</span>
+                    </button>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q7', false)">
+                        <span class="lang-en">B) We might finish some keychains</span>
+                        <span class="lang-zh">B) 我們可能會完成一些鎖匙扣</span>
+                    </button>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q7', false)">
+                        <span class="lang-en">C) Keychains will be printed yesterday</span>
+                        <span class="lang-zh">C) 鎖匙扣將於昨天打印</span>
+                    </button>
+                    <div class="feedback" id="feedback7"></div>
+                </div>
+                <div class="btn-container">
+                    <button class="btn btn-secondary" onclick="prevPage()"><span class="lang-en">← Back</span><span class="lang-zh">← 返回</span></button>
+                    <button class="btn btn-primary" onclick="checkActivity7()"><span class="lang-en">Check Answers</span><span class="lang-zh">檢查答案</span></button>
+                    <button class="btn btn-primary" id="next7" onclick="nextPage()" style="display:none;"><span class="lang-en">Next Level →</span><span class="lang-zh">下一關 →</span></button>
+                </div>
+            </div>
+
+            <!-- Page 8: Resources Needed -->
+            <div class="page" id="page8">
+                <div class="section-intro">
+                    <h2><span class="lang-en">Level 8: Resources Needed</span><span class="lang-zh">第8關：所需資源</span></h2>
+                    <p><span class="lang-en">List 3D printing materials and equipment</span><span class="lang-zh">列出3D打印材料和設備</span></p>
+                </div>
+                <div class="activity-container">
+                    <h3><span class="lang-en">🛠️ Key Expressions:</span><span class="lang-zh">🛠️ 常用語句：</span></h3>
+                    <div class="expression-box">
+                        <strong>"We will need..." <span class="lang-zh">／「我們將需要...」</span></strong>
+                        <span class="lang-en">Example: We will need 3 rolls of PLA filament in different colors.</span>
+                        <span class="lang-zh">例子：我們將需要3卷不同顏色的PLA絲線。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"requires..." / "are required..." <span class="lang-zh">／「需要...」／「被要求...」</span></strong>
+                        <span class="lang-en">Example: Two 3D printers are required for production efficiency.</span>
+                        <span class="lang-zh">例子：需要兩台3D打印機以提高生產效率。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"must be available..." <span class="lang-zh">／「必須可用...」</span></strong>
+                        <span class="lang-en">Example: Design software must be available for model creation.</span>
+                        <span class="lang-zh">例子：設計軟件必須可用於製作模型。</span>
+                    </div>
+                </div>
+                <div class="activity-container">
+                    <div class="activity-title">
+                        <span class="activity-icon">🛠️</span>
+                        <span><span class="lang-en">Identify Required Resources</span><span class="lang-zh">識別所需資源</span></span>
+                    </div>
+                    <p style="margin-bottom: 15px;">
+                        <strong><span class="lang-en">Question:</span><span class="lang-zh">問題：</span></strong>
+                        <span class="lang-en">What resources are needed for 3D-printed keychain production?</span>
+                        <span class="lang-zh">3D打印鎖匙扣製作需要什麼資源？</span>
+                    </p>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q8', true)">
+                        <span class="lang-en">A) 3D printers, PLA filament, design software, and keychain rings</span>
+                        <span class="lang-zh">A) 3D打印機、PLA絲線、設計軟件和鎖匙扣環</span>
+                    </button>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q8', false)">
+                        <span class="lang-en">B) Paper, scissors, and glue</span>
+                        <span class="lang-zh">B) 紙張、剪刀和膠水</span>
+                    </button>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q8', false)">
+                        <span class="lang-en">C) Only a computer</span>
+                        <span class="lang-zh">C) 只需要電腦</span>
+                    </button>
+                    <div class="feedback" id="feedback8"></div>
+                </div>
+                <div class="btn-container">
+                    <button class="btn btn-secondary" onclick="prevPage()"><span class="lang-en">← Back</span><span class="lang-zh">← 返回</span></button>
+                    <button class="btn btn-primary" onclick="checkActivity8()"><span class="lang-en">Check Answers</span><span class="lang-zh">檢查答案</span></button>
+                    <button class="btn btn-primary" id="next8" onclick="nextPage()" style="display:none;"><span class="lang-en">Next Level →</span><span class="lang-zh">下一關 →</span></button>
+                </div>
+            </div>
+
+            <!-- Page 9: Project Outputs -->
+            <div class="page" id="page9">
+                <div class="section-intro">
+                    <h2><span class="lang-en">Level 9: Project Outputs</span><span class="lang-zh">第9關：生產成果</span></h2>
+                    <p><span class="lang-en">Specify final keychain deliverables</span><span class="lang-zh">指明最終鎖匙扣交付成果</span></p>
+                </div>
+                <div class="activity-container">
+                    <h3><span class="lang-en">📦 Key Expressions:</span><span class="lang-zh">📦 常用語句：</span></h3>
+                    <div class="expression-box">
+                        <strong>"The project will deliver..." <span class="lang-zh">／「項目將交付...」</span></strong>
+                        <span class="lang-en">Example: The project will deliver 100 finished 3D-printed keychains.</span>
+                        <span class="lang-zh">例子：項目將交付100個完成的3D打印鎖匙扣。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"will be produced..." <span class="lang-zh">／「將被製作...」</span></strong>
+                        <span class="lang-en">Example: 100 keychains will be produced in three colors.</span>
+                        <span class="lang-zh">例子：將製作100個三種顏色的鎖匙扣。</span>
+                    </div>
+                    <div class="expression-box">
+                        <strong>"includes..." / "consists of..." <span class="lang-zh">／「包括...」／「由...組成」</span></strong>
+                        <span class="lang-en">Example: Each output includes one keychain, one ring, and packaging.</span>
+                        <span class="lang-zh">例子：每個成果包括一個鎖匙扣、一個扣環和包裝。</span>
+                    </div>
+                </div>
+                <div class="activity-container">
+                    <div class="activity-title">
+                        <span class="activity-icon">📦</span>
+                        <span><span class="lang-en">Complete the Output Statement</span><span class="lang-zh">完成成果陳述</span></span>
+                    </div>
+                    <p style="margin-bottom: 15px;">
+                        <strong><span class="lang-en">Question:</span><span class="lang-zh">問題：</span></strong>
+                        <span class="lang-en">Choose the correct project output statement:</span>
+                        <span class="lang-zh">選擇正確的生產成果陳述：</span>
+                    </p>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q9', true)">
+                        <span class="lang-en">A) The project will deliver 100 YC-branded 3D-printed keychains ready for distribution at Open Day</span>
+                        <span class="lang-zh">A) 項目將交付100個青年學院品牌3D打印鎖匙扣，準備在開放日派發</span>
+                    </button>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q9', false)">
+                        <span class="lang-en">B) We will try to make some keychains</span>
+                        <span class="lang-zh">B) 我們會嘗試製作一些鎖匙扣</span>
+                    </button>
+                    <button class="choice-btn" onclick="selectChoice(this, 'q9', false)">
+                        <span class="lang-en">C) The keychains look nice</span>
+                        <span class="lang-zh">C) 鎖匙扣看起來很好</span>
+                    </button>
+                    <div class="feedback" id="feedback9"></div>
+                </div>
+                <div class="btn-container">
+                    <button class="btn btn-secondary" onclick="prevPage()"><span class="lang-en">← Back</span><span class="lang-zh">← 返回</span></button>
+                    <button class="btn btn-primary" onclick="checkActivity9()"><span class="lang-en">Check Answers</span><span class="lang-zh">檢查答案</span></button>
+                    <button class="btn btn-primary" id="next9" onclick="nextPage()" style="display:none;"><span class="lang-en">Next Level →</span><span class="lang-zh">下一關 →</span></button>
+                </div>
+            </div>
+
+            <!-- Page 10: Achievement -->
+            <div class="page" id="page10">
+                <div class="achievement">
+                    <div class="achievement-icon">🎉</div>
+                    <h2 style="color: #0891b2; margin: 20px 0;">
+                        <span class="lang-en">Congratulations!</span>
+                        <span class="lang-zh">恭喜你！</span>
+                    </h2>
+                    <p style="font-size: 1.1em; margin: 15px 0;">
+                        <span class="lang-en">You've mastered all expressions for the 3D-printed keychain production plan!</span>
+                        <span class="lang-zh">你已經掌握了3D打印鎖匙扣生產計劃的所有語句！</span>
+                    </p>
+                    <div style="margin: 30px 0;">
+                        <span class="badge">📋 Background Master</span>
+                        <span class="badge">🎯 Purpose Expert</span>
+                        <span class="badge">📝 Requirements Pro</span>
+                        <span class="badge">✅ Criteria Champion</span>
+                        <span class="badge">👥 Team Coordinator</span>
+                        <span class="badge">⚠️ Problem Solver</span>
+                        <span class="badge">📅 Timeline Planner</span>
+                        <span class="badge">🛠️ Resource Manager</span>
+                        <span class="badge">📦 Output Specialist</span>
+                    </div>
+                    <p style="font-size: 1em; color: #0891b2; margin: 20px 0;">
+                        <span class="lang-en">Final Score: </span>
+                        <span class="lang-zh">最終得分：</span>
+                        <strong><span id="finalScore">0</span> / 20 ⭐</strong>
+                    </p>
+                </div>
+                <div class="btn-container">
+                    <button class="btn btn-secondary" onclick="prevPage()">
+                        <span class="lang-en">← Back</span>
+                        <span class="lang-zh">← 返回</span>
+                    </button>
+                    <button class="btn btn-primary" onclick="restartQuiz()">
+                        <span class="lang-en">Start Again 🔄</span>
+                        <span class="lang-zh">重新開始 🔄</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        let score = 0;
+        const selectedAnswers = {};
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateProgress();
+            initDragAndDrop();
+        });
+
+        function toggleLanguage() {
+            const body = document.body;
+            const currentLang = body.getAttribute('data-lang');
+            body.setAttribute('data-lang', currentLang === 'en' ? 'zh' : 'en');
+        }
+
+        function nextPage() {
+            const pages = document.querySelectorAll('.page');
+            if (currentPage < pages.length - 1) {
+                pages[currentPage].classList.remove('active');
+                currentPage++;
+                pages[currentPage].classList.add('active');
+                updateProgress();
+                if (currentPage === pages.length - 1) {
+                    document.getElementById('finalScore').textContent = score;
+                }
+            }
+        }
+
+        function prevPage() {
+            const pages = document.querySelectorAll('.page');
+            if (currentPage > 0) {
+                pages[currentPage].classList.remove('active');
+                currentPage--;
+                pages[currentPage].classList.add('active');
+                updateProgress();
+            }
+        }
+
+        function updateProgress() {
+            const pages = document.querySelectorAll('.page');
+            const percentage = Math.round((currentPage / (pages.length - 1)) * 100);
+            const progressFill = document.getElementById('progressFill');
+            if (progressFill) {
+                progressFill.style.width = percentage + '%';
+                progressFill.textContent = percentage + '%';
+            }
+        }
+
+        function addScore(points) {
+            score += points;
+            document.getElementById('scoreDisplay').textContent = score;
+        }
+
+        function launchConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+        }
+
+        // Activity 1: Drag and Drop
+        function initDragAndDrop() {
+            const dragItems = document.querySelectorAll('.drag-item');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            let draggedItem = null;
+
+            dragItems.forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    draggedItem = item;
+                    document.body.classList.add('dragging-active');
+                    setTimeout(() => item.classList.add('dragging'), 0);
+                });
+
+                item.addEventListener('dragend', () => {
+                    document.body.classList.remove('dragging-active');
+                    item.classList.remove('dragging');
+                    draggedItem = null;
+                });
+
+                // Touch support
+                item.addEventListener('touchstart', (e) => {
+                    draggedItem = item;
+                    document.body.classList.add('dragging-active');
+                    item.classList.add('dragging');
+                });
+
+                item.addEventListener('touchend', (e) => {
+    document.body.classList.remove('dragging-active');
+    item.classList.remove('dragging');
+    const touch = e.changedTouches[0];
+    const dropZone = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (dropZone && dropZone.classList.contains('drop-zone')) {
+        // Keep the title, only remove old dragged items
+        const existingItem = dropZone.querySelector('.drag-item');
+        if (existingItem) {
+            existingItem.remove();
+        }
+        dropZone.appendChild(draggedItem);
+    }
+    draggedItem = null;
+});
+
+            });
+
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    zone.classList.add('drag-over');
+                });
+
+                zone.addEventListener('dragleave', () => {
+                    zone.classList.remove('drag-over');
+                });
+
+                zone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    if (draggedItem) {
+        // Keep the title, only remove old dragged items
+        const existingItem = zone.querySelector('.drag-item');
+        if (existingItem) {
+            existingItem.remove();
+        }
+        zone.appendChild(draggedItem);
+    }
+});
+            });
+        }
+
+        function checkActivity1() {
+            const dropZones = document.querySelectorAll('#page1 .drop-zone');
+            let correct = 0;
+            dropZones.forEach(zone => {
+                const answer = zone.getAttribute('data-answer');
+                const item = zone.querySelector('.drag-item');
+                if (item && item.getAttribute('data-section') === answer) {
+                    zone.classList.add('correct');
+                    zone.classList.remove('incorrect');
+                    correct++;
+                } else {
+                    zone.classList.add('incorrect');
+                    zone.classList.remove('correct');
+                }
+            });
+
+            const feedback = document.getElementById('feedback1');
+            if (correct === dropZones.length) {
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '<span class="lang-en">✨ Excellent! All matches are correct.</span><span class="lang-zh">✨ 太好了！所有配對都正確。</span>';
+                addScore(2);
+                launchConfetti();
+                document.getElementById('next1').style.display = 'inline-block';
+                document.getElementById('check1').disabled = true;
+            } else {
+                feedback.className = 'feedback incorrect show';
+                feedback.innerHTML = '<span class="lang-en">❌ Some matches are incorrect. Try again!</span><span class="lang-zh">❌ 有些配對不正確。再試一次！</span>';
+            }
+        }
+
+        // Activity 2: Fill in the Blank
+        function checkActivity2() {
+            const blank1 = document.getElementById('blank1').value.trim().toLowerCase();
+            const blank2 = document.getElementById('blank2').value.trim().toLowerCase();
+            const feedback = document.getElementById('feedback2');
+
+            const correctBlank1 = blank1 === 'will';
+            const correctBlank2 = blank2.includes('has asked') || blank2.includes('have asked');
+
+            if (correctBlank1 && correctBlank2) {
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '<span class="lang-en">✨ Perfect! You used the correct tenses.</span><span class="lang-zh">✨ 完美！你使用了正確的時態。</span>';
+                addScore(2);
+                launchConfetti();
+                document.getElementById('next2').style.display = 'inline-block';
+            } else {
+                feedback.className = 'feedback incorrect show';
+                feedback.innerHTML = '<span class="lang-en">❌ Not quite. Hint: Use "will" and "has asked".</span><span class="lang-zh">❌ 不完全正確。提示：使用 "will" 和 "has asked"。</span>';
+            }
+        }
+
+        // Activities 3-9: Multiple Choice
+        function selectChoice(button, questionId, isCorrect) {
+    // Find the question group container
+    const questionGroup = button.closest('.question-group') || button.parentElement;
+    const buttons = questionGroup.querySelectorAll('.choice-btn');
+    
+    // Only deselect buttons within the same question
+    buttons.forEach(btn => btn.classList.remove('selected'));
+    
+    button.classList.add('selected');
+    selectedAnswers[questionId] = isCorrect;
+}
+
+        function checkActivity3() {
+            const feedback = document.getElementById('feedback3');
+            const q1 = selectedAnswers['q1'] === true;
+            const q2 = selectedAnswers['q2'] === true;
+
+            if (q1 && q2) {
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '<span class="lang-en">✨ Excellent! Purpose starts with "To..." and requirements use "should".</span><span class="lang-zh">✨ 太好了！目的以 "To..." 開始，要求使用 "should"。</span>';
+                addScore(2);
+                launchConfetti();
+                document.getElementById('next3').style.display = 'inline-block';
+            } else {
+                feedback.className = 'feedback incorrect show';
+                feedback.innerHTML = '<span class="lang-en">❌ Review: Purpose = "To...", Requirements = "should..."</span><span class="lang-zh">❌ 重溫：目的 = "To..."，要求 = "should..."</span>';
+            }
+        }
+
+        function checkActivity4() {
+            const feedback = document.getElementById('feedback4');
+            if (selectedAnswers['q4'] === true) {
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '<span class="lang-en">✨ Great! Success criteria must be specific and measurable.</span><span class="lang-zh">✨ 很好！成功準則必須具體和可衡量。</span>';
+                addScore(2);
+                launchConfetti();
+                document.getElementById('next4').style.display = 'inline-block';
+            } else {
+                feedback.className = 'feedback incorrect show';
+                feedback.innerHTML = '<span class="lang-en">❌ Success criteria should define clear, measurable outcomes.</span><span class="lang-zh">❌ 成功準則應定義清晰、可衡量的結果。</span>';
+            }
+        }
+
+        function checkActivity5() {
+            const feedback = document.getElementById('feedback5');
+            if (selectedAnswers['q5'] === true) {
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '<span class="lang-en">✨ Correct! Production technicians operate the 3D printers.</span><span class="lang-zh">✨ 正確！生產技術員操作3D打印機。</span>';
+                addScore(2);
+                launchConfetti();
+                document.getElementById('next5').style.display = 'inline-block';
+            } else {
+                feedback.className = 'feedback incorrect show';
+                feedback.innerHTML = '<span class="lang-en">❌ Think about who has the technical skills to operate printers.</span><span class="lang-zh">❌ 想想誰有操作打印機的技術技能。</span>';
+            }
+        }
+
+        function checkActivity6() {
+            const feedback = document.getElementById('feedback6');
+            if (selectedAnswers['q6'] === true) {
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '<span class="lang-en">✨ Excellent! Printing delays are realistic production challenges.</span><span class="lang-zh">✨ 太好了！打印延誤是實際的生產挑戰。</span>';
+                addScore(2);
+                launchConfetti();
+                document.getElementById('next6').style.display = 'inline-block';
+            } else {
+                feedback.className = 'feedback incorrect show';
+                feedback.innerHTML = '<span class="lang-en">❌ Potential problems should be realistic and anticipatable.</span><span class="lang-zh">❌ 潛在問題應該是實際和可預見的。</span>';
+            }
+        }
+
+        function checkActivity7() {
+            const feedback = document.getElementById('feedback7');
+            if (selectedAnswers['q7'] === true) {
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '<span class="lang-en">✨ Perfect! Milestones use "By [date], we will..." format.</span><span class="lang-zh">✨ 完美！里程碑使用 "By [date], we will..." 格式。</span>';
+                addScore(2);
+                launchConfetti();
+                document.getElementById('next7').style.display = 'inline-block';
+            } else {
+                feedback.className = 'feedback incorrect show';
+                feedback.innerHTML = '<span class="lang-en">❌ Milestones need specific dates and clear deliverables.</span><span class="lang-zh">❌ 里程碑需要具體日期和明確的交付成果。</span>';
+            }
+        }
+
+        function checkActivity8() {
+            const feedback = document.getElementById('feedback8');
+            if (selectedAnswers['q8'] === true) {
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '<span class="lang-en">✨ Excellent! These are all essential 3D printing resources.</span><span class="lang-zh">✨ 太好了！這些都是必要的3D打印資源。</span>';
+                addScore(2);
+                launchConfetti();
+                document.getElementById('next8').style.display = 'inline-block';
+            } else {
+                feedback.className = 'feedback incorrect show';
+                feedback.innerHTML = '<span class="lang-en">❌ Think about what equipment and materials 3D printing needs.</span><span class="lang-zh">❌ 想想3D打印需要什麼設備和材料。</span>';
+            }
+        }
+
+        function checkActivity9() {
+            const feedback = document.getElementById('feedback9');
+            if (selectedAnswers['q9'] === true) {
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '<span class="lang-en">✨ Perfect! Outputs should be specific and measurable.</span><span class="lang-zh">✨ 完美！成果應該具體和可衡量。</span>';
+                addScore(2);
+                launchConfetti();
+                document.getElementById('next9').style.display = 'inline-block';
+            } else {
+                feedback.className = 'feedback incorrect show';
+                feedback.innerHTML = '<span class="lang-en">❌ Project outputs must specify quantity, quality, and delivery details.</span><span class="lang-zh">❌ 項目成果必須指明數量、質量和交付細節。</span>';
+            }
+          }
+function restartQuiz() {
+    // Reset all variables
+    currentPage = 0;
+    score = 0;
+    Object.keys(selectedAnswers).forEach(key => delete selectedAnswers[key]);
+    
+    // Reset score display
+    document.getElementById('scoreDisplay').textContent = '0';
+    
+    // Reset all pages
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => page.classList.remove('active'));
+    pages[0].classList.add('active');
+    
+    // Reset all feedback
+    document.querySelectorAll('.feedback').forEach(fb => {
+        fb.classList.remove('show', 'correct', 'incorrect');
+        fb.innerHTML = '';
+    });
+    
+    // Reset all buttons
+    document.querySelectorAll('[id^="check"]').forEach(btn => btn.disabled = false);
+    document.querySelectorAll('[id^="next"]').forEach(btn => btn.style.display = 'none');
+    
+    // Reset all choice buttons
+    document.querySelectorAll('.choice-btn').forEach(btn => {
+        btn.classList.remove('selected', 'correct', 'incorrect');
+    });
+    
+    // Reset drop zones
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+        zone.classList.remove('correct', 'incorrect');
+        const dragItem = zone.querySelector('.drag-item');
+        if (dragItem) {
+            document.getElementById('dragSource1').appendChild(dragItem);
+        }
+    });
+    
+    // Reset input fields
+    document.querySelectorAll('.input-field').forEach(input => input.value = '');
+    
+    // Update progress
+    updateProgress();
+}
+     
+    </script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
