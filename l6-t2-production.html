@@ -1,18 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <title>L6 - (Production Project) Completing a Sample Project Plan Presentation Script</title>
-    
-
-  </head>
-    
-  <body>
-  <!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <title>L6 - (Production Project) Completing a Sample Project Plan Presentation Script</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>L6 - (Production Project) Presentation Script Practice</title>
   <style>
@@ -30,7 +21,10 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    body::-webkit-scrollbar { display: none; }
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
 
     .container {
       max-width: 1000px;
@@ -147,8 +141,14 @@
       min-height: 1.5rem;
       margin-bottom: 1rem;
     }
-    .feedback.correct { color: #10b981; }
-    .feedback.wrong { color: #ef4444; }
+
+    .feedback.correct {
+      color: #10b981;
+    }
+
+    .feedback.wrong {
+      color: #ef4444;
+    }
 
     .sections-area {
       display: flex;
@@ -193,7 +193,19 @@
       font-size: 0.9rem;
       line-height: 1.9;
       color: #334155;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+    }
+
+    .section-controls button {
+      font-size: 0.8rem;
+      padding: 0.45rem 1.2rem;
     }
 
     .blank-select {
@@ -261,8 +273,13 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     .overview-content {
@@ -277,11 +294,21 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    .overview-content::-webkit-scrollbar { display: none; }
+
+    .overview-content::-webkit-scrollbar {
+      display: none;
+    }
 
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .overview-header {
@@ -353,8 +380,13 @@
       box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
     }
 
-    .lang-en { display: inline; }
-    .lang-zh { display: none; }
+    .lang-en {
+      display: inline;
+    }
+
+    .lang-zh {
+      display: none;
+    }
 
     .tts-controls {
       display: flex;
@@ -400,26 +432,48 @@
     }
 
     @media (max-width: 640px) {
-      .container { padding: 1rem; }
-      header { padding: 1.5rem 1rem; }
-      h1 { font-size: 1.3rem; }
-      .subtitle { font-size: 0.85rem; }
-      .section-text { font-size: 0.85rem; line-height: 1.8; }
-      .blank-select { 
-        min-width: 120px; 
+      .container {
+        padding: 1rem;
+      }
+
+      header {
+        padding: 1.5rem 1rem;
+      }
+
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      .subtitle {
+        font-size: 0.85rem;
+      }
+
+      .section-text {
+        font-size: 0.85rem;
+        line-height: 1.8;
+      }
+
+      .blank-select {
+        min-width: 120px;
         font-size: 0.8rem;
         padding: 0.35rem 0.6rem;
       }
+
       .lang-toggle {
         top: 0.75rem;
         right: 0.75rem;
         padding: 0.4rem 0.8rem;
         font-size: 0.8rem;
       }
+
+      .section-controls button {
+        flex: 1 1 100%;
+      }
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 </head>
+
 <body>
   <div class="container">
     <header>
@@ -436,16 +490,16 @@
 
     <div class="controls">
       <button class="btn-secondary" id="resetBtn">
-        🔄 <span class="lang-en">Reset</span><span class="lang-zh">重設</span>
+        🔄 <span class="lang-en">Reset All</span><span class="lang-zh">重設全部</span>
       </button>
       <button class="btn-primary" id="checkBtn">
-        ✓ <span class="lang-en">Check Answers</span><span class="lang-zh">檢查答案</span>
+        ✓ <span class="lang-en">Check All Answers</span><span class="lang-zh">檢查全部答案</span>
       </button>
     </div>
 
     <p class="instruction">
-      <span class="lang-en">💡 Tip: Select the correct phrase from each dropdown menu to complete the sentences.</span>
-      <span class="lang-zh">💡 提示：從每個下拉選單中選擇正確的詞語以完成句子。</span>
+      <span class="lang-en">💡 Tip: You can check each section separately, or check all answers at once.</span>
+      <span class="lang-zh">💡 提示：你可以逐部分檢查答案，或者一次過檢查全部答案。</span>
     </p>
 
     <div id="feedback" class="feedback"></div>
@@ -502,7 +556,7 @@
         labelEn: "Introducing project topic, background & purpose",
         labelZh: "介紹專題主題、背景及目的",
         textEn: "Thanks, Rita. First, our project topic is <blank> a souvenir for Youth College YC Open Day. <blank> YC <blank> an Open Day every year to promote different study programmes, the Pro-Act Centre <blank> to <blank> a workshop for visitors to experience the production of a 3D-printed keychain. So, the purpose of our project is to <blank> and produce the prototype of a 3D-printed keychain to be <blank> to the visitors on YC Open Day.",
-        textZh: "多謝，Rita。首先，我哋嘅專題係<blank>Youth College YC開放日嘅紀念品。<blank>YC每年都會<blank>開放日嚟推廣唔同課程，Pro-Act Centre<blank><blank>工作坊畀訪客體驗3D打印鎖匙扣嘅製作過程。所以，我哋專題嘅目的係<blank>同埋製作3D打印鎖匙扣嘅原型，然後喺YC開放日<blank>畀訪客。",
+        textZh: "多謝，Rita。首先，我哋嘅專題係<blank>Youth College YC開放日嘅紀念品。<blank>YC每年都會<blank>開放日嚟推廣唔同課程，Pro-Act Centre<blank><blank>工作坊畀訪客體驗3D打印鎖匙扣嘅製作過程。所以，我哋專題嘅目的係設計同埋製作3D打印鎖匙扣嘅原型，然後喺YC開放日<blank>畀訪客。",
         optionsEn: ["producing", "producing for", "As", "Because", "organises", "organised", "is going", "gone", "hold", "held", "design", "designate", "given", "giving"],
         optionsZh: ["製作", "為咗製作", "由於", "因為", "舉辦", "舉辦咗", "會", "去咗", "舉辦", "舉辦咗", "設計", "指定", "送", "畀"],
         fullTextEn: "Thanks, Rita. First, our project topic is producing a souvenir for Youth College YC Open Day. As YC organises an Open Day every year to promote different study programmes, the Pro-Act Centre is going to hold a workshop for visitors to experience the production of a 3D-printed keychain. So, the purpose of our project is to design and produce the prototype of a 3D-printed keychain to be given to the visitors on YC Open Day.",
@@ -608,11 +662,26 @@
           <div class="lang-zh">${htmlZh}</div>
         `;
 
+        const controlsDiv = document.createElement('div');
+        controlsDiv.className = 'section-controls';
+        controlsDiv.innerHTML = `
+          <button class="btn-primary section-check-btn" data-section-id="${section.id}">
+            ✓ <span class="lang-en">Check this section</span>
+              <span class="lang-zh">檢查呢一部分</span>
+          </button>
+          <button class="btn-secondary section-reset-btn" data-section-id="${section.id}">
+            🔄 <span class="lang-en">Reset this section</span>
+               <span class="lang-zh">重設呢一部分</span>
+          </button>
+        `;
+
         card.appendChild(label);
         card.appendChild(textContainer);
+        card.appendChild(controlsDiv);
         sectionsArea.appendChild(card);
       });
 
+      // dropdown change
       document.querySelectorAll('.blank-select').forEach(select => {
         select.addEventListener('change', (e) => {
           if (e.target.value) {
@@ -620,22 +689,47 @@
           } else {
             e.target.classList.remove('filled');
           }
-          clearFeedback();
+          // only clear message, not colours
+          feedback.textContent = '';
+          feedback.className = 'feedback';
+        });
+      });
+
+      // section-level buttons
+      document.querySelectorAll('.section-check-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const sectionId = parseInt(btn.dataset.sectionId, 10);
+          const lang = currentLang;
+          checkSection(sectionId, lang);
+        });
+      });
+
+      document.querySelectorAll('.section-reset-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const sectionId = parseInt(btn.dataset.sectionId, 10);
+          const lang = currentLang;
+
+          const card = document.querySelector(`.section-card[data-section-id="${sectionId}"]`);
+          card.classList.remove('correct', 'wrong');
+
+          const selects = document.querySelectorAll(`.blank-select[data-section="${sectionId}"][data-lang="${lang}"]`);
+          selects.forEach(select => {
+            select.value = '';
+            select.classList.remove('filled', 'correct', 'wrong');
+          });
+
+          feedback.textContent = '';
+          feedback.className = 'feedback';
         });
       });
 
       updateLanguage();
     }
 
+    // now only clears the message, not colours
     function clearFeedback() {
       feedback.textContent = '';
       feedback.className = 'feedback';
-      document.querySelectorAll('.section-card').forEach(card => {
-        card.classList.remove('correct', 'wrong');
-      });
-      document.querySelectorAll('.blank-select').forEach(select => {
-        select.classList.remove('correct', 'wrong');
-      });
     }
 
     function reconstructText(sectionId, lang) {
@@ -665,60 +759,70 @@
         .replace(/[，。、：；？！]/g, "");
     }
 
+    function checkSection(sectionId, lang) {
+      const section = sections.find(s => s.id === sectionId);
+      const { text: userText } = reconstructText(sectionId, lang);
+      const correctText = lang === 'en' ? section.fullTextEn : section.fullTextZh;
+
+      const isCorrect = lang === 'zh'
+        ? normalizeZh(userText) === normalizeZh(correctText)
+        : userText === correctText;
+
+      const card = document.querySelector(`.section-card[data-section-id="${sectionId}"]`);
+      const selects = document.querySelectorAll(`.blank-select[data-section="${sectionId}"][data-lang="${lang}"]`);
+
+      if (isCorrect) {
+        card.classList.add('correct');
+        card.classList.remove('wrong');
+        selects.forEach(select => {
+          if (select.value) {
+            select.classList.add('correct');
+            select.classList.remove('wrong');
+          }
+        });
+      } else {
+        card.classList.add('wrong');
+        card.classList.remove('correct');
+        selects.forEach(select => {
+          if (select.value) {
+            select.classList.add('wrong');
+            select.classList.remove('correct');
+          } else {
+            select.classList.add('wrong');
+          }
+        });
+      }
+
+      feedback.innerHTML = isCorrect
+        ? (lang === 'en'
+          ? '✅ This section is correct.'
+          : '✅ 呢一部分全部正確。')
+        : (lang === 'en'
+          ? '❌ There are errors in this section. Check the highlighted blanks.'
+          : '❌ 呢一部分有啲錯。檢查紅色嘅選項。');
+
+      feedback.className = isCorrect ? 'feedback correct' : 'feedback wrong';
+
+      return isCorrect;
+    }
+
     function checkAnswers() {
       let allCorrect = true;
       const lang = currentLang;
 
       sections.forEach(section => {
-        const { text: userText, allFilled } = reconstructText(section.id, lang);
-        const correctText = lang === 'en' ? section.fullTextEn : section.fullTextZh;
-
-        const isCorrect = lang === 'zh' 
-        ? normalizeZh(userText) === normalizeZh(correctText)
-        : userText === correctText;
-
-
-        const card = document.querySelector(`.section-card[data-section-id="${section.id}"]`);
-        const selects = document.querySelectorAll(`.blank-select[data-section="${section.id}"][data-lang="${lang}"]`);
-
-        if (isCorrect) {
-          card.classList.add('correct');
-          card.classList.remove('wrong');
-          selects.forEach(select => {
-            if (select.value) {
-              select.classList.add('correct');
-              select.classList.remove('wrong');
-            }
-          });
-        } else {
-          card.classList.add('wrong');
-          card.classList.remove('correct');
-          allCorrect = false;
-
-          selects.forEach(select => {
-            if (select.value) {
-              select.classList.add('wrong');
-              select.classList.remove('correct');
-            } else {
-              select.classList.add('wrong');
-            }
-          });
-        }
+        const ok = checkSection(section.id, lang);
+        if (!ok) allCorrect = false;
       });
 
       if (allCorrect) {
-        feedback.innerHTML = currentLang === 'en' 
-          ? '🎉 Excellent! All answers are correct!' 
+        feedback.innerHTML = currentLang === 'en'
+          ? '🎉 Excellent! All answers are correct!'
           : '🎉 好叻！所有答案都啱晒！';
         feedback.className = 'feedback correct';
 
         celebrateWithConfetti();
         setTimeout(() => showOverview(), 2500);
-      } else {
-        feedback.innerHTML = currentLang === 'en'
-          ? '❌ Some answers are incorrect. Check the highlighted sections and try again.'
-          : '❌ 有啲答案唔啱。檢查一下標示咗嘅部分再試過啦。';
-        feedback.className = 'feedback wrong';
       }
     }
 
@@ -726,7 +830,14 @@
       confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
       setTimeout(() => { confetti({ particleCount: 50, angle: 60, spread: 55, origin: { x: 0 } }); }, 250);
       setTimeout(() => { confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1 } }); }, 500);
-      setTimeout(() => { confetti({ particleCount: 100, spread: 100, origin: { y: 0.6 }, colors: ['#667eea', '#764ba2', '#f093fb', '#10b981', '#3b82f6'] }); }, 1000);
+      setTimeout(() => {
+        confetti({
+          particleCount: 100,
+          spread: 100,
+          origin: { y: 0.6 },
+          colors: ['#667eea', '#764ba2', '#f093fb', '#10b981', '#3b82f6']
+        });
+      }, 1000);
     }
 
     function showOverview() {
@@ -863,7 +974,7 @@
     }
 
     if ('speechSynthesis' in window) {
-      window.speechSynthesis.onvoiceschanged = () => {};
+      window.speechSynthesis.onvoiceschanged = () => { };
     }
 
     function updateLanguage() {
@@ -903,8 +1014,5 @@
     createSections();
   </script>
 </body>
-</html>
-    
-  </body>
-  
+
 </html>
